@@ -1,5 +1,24 @@
 # coding: utf-8
 
+"""
+Description:
+A python script to interact with Jira
+
+License:
+The MIT License (MIT)
+Copyright (c) 2016 Nik Khilnani
+
+Github:
+https://github.com/khilnani/jira.py
+
+Configuration:
+Rename 'jira.sample.conf' to 'jira.conf' and update values
+
+To use:
+1 - In any app, use App Share, Run in Pythonista and then select this script
+2 - Copy text with a Jira ID and run this script. 
+"""
+
 # Overview https://developer.atlassian.com/jiradev/jira-apis/jira-rest-apis
 # General API https://docs.atlassian.com/jira/REST/latest/
 # Agile API https://docs.atlassian.com/jira-software/REST/latest/
