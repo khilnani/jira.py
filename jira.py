@@ -199,6 +199,7 @@ def main():
         keys = JIRA_PAT.findall(text)
         if len(keys) > 0:
             key = keys[0]
+            print('Found Jira ID: %s' % key)
         else:
             key = raw_input('Jira ID:')
         
