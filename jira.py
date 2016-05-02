@@ -2,21 +2,24 @@
 
 """
 Description:
-A python script to interact with Jira
+A python script to parse clipboard or shared text for jira ids 
+and then output key info for that jira ticket instantly.
 
 License:
 The MIT License (MIT)
 Copyright (c) 2016 Nik Khilnani
 
 Github:
-https://github.com/khilnani/jira.py
+https://github.com/khilnani/pythonista-scripts/
 
 Configuration:
 Rename 'jira.sample.conf' to 'jira.conf' and update values
 
 To use:
 1 - In any app, use App Share, Run in Pythonista and then select this script
-2 - Copy text with a Jira ID and run this script. 
+2 - Copy text with a Jira ID and run this script in Pythonista.
+3 - Run this script in a linux/os x terminal with the JIRA ID as a command line arg
+    eg. python jira.py ST-1222
 """
 
 # Overview https://developer.atlassian.com/jiradev/jira-apis/jira-rest-apis
@@ -47,12 +50,14 @@ def df(s):
         print (e)
     return sf
 
-def update_jira_info(id):
-    base_url, username, jsessionid = get_jira_info()
+def update_conf_info(id, user=None):
+    base_url, username, jsessionid = get_conf_info()
     conf = {}
     if base_url:
         conf['BASE_URL'] = base_url
-    if username:
+    if user:
+        conf['USER'] = user
+    elif username:
         conf['USER'] = username
     if id:
         conf['JSESSIONID'] = id
@@ -65,7 +70,7 @@ def update_jira_info(id):
         logging.error('Could not write %s' % CONF_FILE)
         sys.exit()
 
-def get_jira_info():
+def get_conf_info():
     try:
         with open(CONF_FILE, 'r') as conf_file:
             conf = json.load(conf_file)
@@ -92,28 +97,15 @@ def get_new_cookie(base_url, username=None):
     body = {"username": username, "password":password}
     r = requests.post(url, json=body)
     jsessionid = r.cookies['JSESSIONID']
-    update_jira_info(jsessionid)
+    update_conf_info(jsessionid, username)
     return jsessionid
 
-def check_jsessionid(base_url, jsessionid):
-    print('Checking session ...')
-    url = '%s/rest/api/2/myself' % base_url
-    r = requests.get(url, cookies={'JSESSIONID':jsessionid})
-    valid = r.status_code >= 200 and r.status_code < 400
-    return valid
-
-def get_issue_info(base_url, jsessionid, key):
-    print('Getting jira issue data ...')
-    url = '%s/rest/api/2/issue/%s' % (base_url, key)
-    http_url = '%s/browse/%s' % (base_url, key) 
-    jira_data = None
+def get(base_url, jsessionid, path):
+    url = base_url + path
     try:
-        r = requests.get(url, cookies={'JSESSIONID':jsessionid})      
-        if r.status_code == 200:
-            jira_data = r.json()
-        elif r.status_code == 404:
-            print('Issue not found.')
-            sys.exit(1)            
+        r = requests.get(url, cookies={'JSESSIONID':jsessionid})
+        valid = r.status_code >= 200 and r.status_code < 400
+        return (valid, r)
     except ValueError as e:
         print e
         print r.headers
@@ -121,6 +113,25 @@ def get_issue_info(base_url, jsessionid, key):
     except requests.exceptions.SSLError as e:
         print e
         sys.exit(e)
+
+def check_jsessionid(base_url, jsessionid):
+    print('Checking session ...')
+    path = '/rest/api/2/myself'
+    valid, r = get(base_url, jsessionid, path)
+    return valid
+
+def get_issue_info(base_url, jsessionid, key):
+    print('Getting jira issue data ...')
+    path = '/rest/api/2/issue/%s' % key
+    http_url = '%s/browse/%s' % (base_url, key) 
+    jira_data = None
+    valid, r = get(base_url, jsessionid, path)
+    if valid:
+        jira_data = r.json()
+    else:
+        print('Issue not found.')
+        sys.exit(1) 
+    
     try:
         f = jira_data['fields']
         print('--------------------------------------')
@@ -199,10 +210,11 @@ def main():
         keys = JIRA_PAT.findall(text)
         if len(keys) > 0:
             key = keys[0]
+            print('Found Jira ID: %s' % key)
         else:
             key = raw_input('Jira ID:')
         
-        base_url, username, jsessionid = get_jira_info() 
+        base_url, username, jsessionid = get_conf_info() 
         
         if check_jsessionid(base_url, jsessionid):
             get_issue_info(base_url, jsessionid, key)
