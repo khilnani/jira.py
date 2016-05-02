@@ -2,7 +2,7 @@
 
 """
 Description:
-A python script to parse clipboard or shared text for jira ids 
+A python script to parse clipboard or shared text for jira ids
 and then output key info for that jira ticket instantly.
 
 License:
@@ -10,7 +10,7 @@ The MIT License (MIT)
 Copyright (c) 2016 Nik Khilnani
 
 Github:
-https://github.com/khilnani/pythonista-scripts/
+https://github.com/khilnani/jira.py
 
 Configuration:
 Rename 'jira.sample.conf' to 'jira.conf' and update values
@@ -61,7 +61,7 @@ def update_conf_info(id, user=None):
         conf['USER'] = username
     if id:
         conf['JSESSIONID'] = id
-        
+
     try:
         with open(CONF_FILE, 'w') as conf_file:
             #print(conf)
@@ -123,15 +123,15 @@ def check_jsessionid(base_url, jsessionid):
 def get_issue_info(base_url, jsessionid, key):
     print('Getting jira issue data ...')
     path = '/rest/api/2/issue/%s' % key
-    http_url = '%s/browse/%s' % (base_url, key) 
+    http_url = '%s/browse/%s' % (base_url, key)
     jira_data = None
     valid, r = get(base_url, jsessionid, path)
     if valid:
         jira_data = r.json()
     else:
         print('Issue not found.')
-        sys.exit(1) 
-    
+        sys.exit(1)
+
     try:
         f = jira_data['fields']
         print('--------------------------------------')
@@ -187,7 +187,7 @@ def get_issue_info(base_url, jsessionid, key):
         print(str(e))
     except KeyError as e:
         print('Missing data: ' + str(e))
-    
+
 def main():
     text = None
     if len(sys.argv) > 1:
@@ -205,7 +205,7 @@ def main():
                 text = clipboard.get()
         except ImportError:
             pass
-    
+
     if text:
         keys = JIRA_PAT.findall(text)
         if len(keys) > 0:
@@ -213,14 +213,14 @@ def main():
             print('Found Jira ID: %s' % key)
         else:
             key = raw_input('Jira ID:')
-        
-        base_url, username, jsessionid = get_conf_info() 
-        
+
+        base_url, username, jsessionid = get_conf_info()
+
         if check_jsessionid(base_url, jsessionid):
             get_issue_info(base_url, jsessionid, key)
         else:
             jsessionid = get_new_cookie(base_url, username)
-            get_issue_info(base_url, jsessionid, key)     
+            get_issue_info(base_url, jsessionid, key)
     else:
         print('No input text found.')
 
