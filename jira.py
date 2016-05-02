@@ -26,6 +26,8 @@ To use:
 # General API https://docs.atlassian.com/jira/REST/latest/
 # Agile API https://docs.atlassian.com/jira-software/REST/latest/
 
+############################################################
+
 import json
 import re
 # pip install requests[security] --upgrade
@@ -38,8 +40,15 @@ import dateutil.parser
 import datetime
 import requests
 
+############################################################
+
 CONF_FILE = 'jira.conf'
 JIRA_PAT = re.compile('([a-zA-Z]+-[0-9]+)')
+
+__version__ = '0.1.0'
+print 'Version: ' + __version__
+
+############################################################
 
 def df(s):
     sf = s
@@ -49,6 +58,8 @@ def df(s):
     except Exception as e:
         print (e)
     return sf
+
+############################################################
 
 def update_conf_info(id, user=None):
     base_url, username, jsessionid = get_conf_info()
@@ -88,6 +99,8 @@ def get_conf_info():
         logging.error('Could not find %s' % CONF_FILE)
         sys.exit()
 
+############################################################
+
 def get_new_cookie(base_url, username=None):
     print('Updating session ...')
     url = '%s/rest/auth/1/session' % base_url
@@ -119,6 +132,8 @@ def check_jsessionid(base_url, jsessionid):
     path = '/rest/api/2/myself'
     valid, r = get(base_url, jsessionid, path)
     return valid
+
+############################################################
 
 def get_issue_info(base_url, jsessionid, key):
     print('Getting jira issue data ...')
@@ -188,6 +203,8 @@ def get_issue_info(base_url, jsessionid, key):
     except KeyError as e:
         print('Missing data: ' + str(e))
 
+############################################################
+
 def main():
     text = None
     if len(sys.argv) > 1:
@@ -224,5 +241,9 @@ def main():
     else:
         print('No input text found.')
 
+############################################################
+
 if __name__ == '__main__':
     main()
+
+############################################################
