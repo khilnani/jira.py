@@ -50,29 +50,30 @@ on run {input, parameters}
 end run
 	```
     - Pick one of the options below
-    	- 1 - Extract Jira ID
+    	- 1 - **Extract Jira ID**
     	    - `Utilities` /  `Run JavaScript` 
 	        ```
 function run(input, parameters) {
 	var re = new RegExp('([a-zA-Z]+-[0-9]+)');
 	var items = re.exec(input);
 	if (!items) {
-		return input;
+        return input;
 	} else {
-		return 'https://jira.com/browse/' + items[0];
+        return 'https://jira.com/browse/' + items[0];
 	}
 	return input;
 }
 	        ```
-        - 2 -  Perform a Jira Search 
+        - 2 - **Perform a Jira Search**
 	        - `Utilities` /  `Run JavaScript`
 	        ```
 function run(input, parameters) {
 	return 'https://jira.nationalgeographic.com/issues/?jql=text%20~%20%22' + input + '%22';
 }
 	        ```
-    - Launch the default browser - `Internet` / `Display Webpages`
-- Launch `System Preferences` and navigate to `Keyboard` / `Shortcuts`
-- Under `Services` locate your Service in the `Text` category
-- Assign a keyboard shortcut.
+    - **Launch the default browser** - `Internet` / `Display Webpages`
+- Setup Keyboard Shortcut
+    - Launch `System Preferences` and navigate to `Keyboard` / `Shortcuts`
+    - Under `Services` locate your Service in the `Text` category
+    - Assign a keyboard shortcut.
 
