@@ -1,15 +1,15 @@
 ## jira.py
 
-Python scripts to help improve Jira interactions
+Python scripts to help improve Jira interactions.
 
 While designed for the iOS [Pythonista](http://omz-software.com/pythonista/) application, the scripts runs on any linux/mac os environment.
 
-### `jira.py`
+#### `jira.py`
 
 Extract Jira ID from clipboard or shared text or command line arg,
 and then output summary info for that jira ticket instantly.
 
-### `jira-id.py`
+#### `jira-id.py`
 
 Extract Jira ID from clipboard or shared text or command line arg,
 and launch a browser with the URL to the Jira issue.
