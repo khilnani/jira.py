@@ -45,8 +45,8 @@ Linux/Mac OS
     - **Prompt for text (Optional)** - `Utilities` / `Run AppleScript`
 	```
 on run {input, parameters}
-    set x to the text returned of (display dialog "Enter a Jira ID" default answer input buttons {"OK"} default button 1)
-    return x
+	set x to the text returned of (display dialog "Enter a Jira ID" default answer input buttons {"OK"} default button 1)
+	return x
 end run
 	```
     - Pick one of the options below
