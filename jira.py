@@ -28,16 +28,16 @@ To use:
 
 ############################################################
 
-import json
-import re
-# pip install requests[security] --upgrade
-import logging
 import sys
+import re
+import logging
+import json
 import urllib2
 import getpass
+import datetime
 # pip install python-dateutil
 import dateutil.parser
-import datetime
+# pip install requests[security] --upgrade
 import requests
 
 ############################################################
