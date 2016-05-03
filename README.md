@@ -64,11 +64,11 @@ function run(input, parameters) {
 	return input;
 }
 	        ```
-        - 2 - **Perform a Jira Search**
+        - 2 - **Perform a Jira JQL Search**
 	        - `Utilities` /  `Run JavaScript`
 	        ```
 function run(input, parameters) {
-	return 'https://jira.nationalgeographic.com/issues/?jql=text%20~%20%22' + input + '%22';
+	return 'https://jira.nationalgeographic.com/issues/?jql=' + input;
 }
 	        ```
     - **Launch the default browser** - `Internet` / `Display Webpages`
