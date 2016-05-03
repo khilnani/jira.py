@@ -57,9 +57,9 @@ function run(input, parameters) {
 	var re = new RegExp('([a-zA-Z]+-[0-9]+)');
 	var items = re.exec(input);
 	if (!items) {
-        return input;
+		return input;
 	} else {
-        return 'https://jira.com/browse/' + items[0];
+		return 'https://jira.com/browse/' + items[0];
 	}
 	return input;
 }
