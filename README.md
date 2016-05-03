@@ -26,7 +26,7 @@ and launch a browser with the URL to the Jira issue.
         - Customize the prompt to something like 'Text with Jira id'
     - *Utilities - Run JavaScript*
         - Use the JavScript below to extracxt a Jira ID from text
-```
+	```
 function run(input, parameters) {
 	var re = new RegExp('([a-zA-Z]+-[0-9]+)');
 	var items = re.exec(input);
@@ -37,7 +37,7 @@ function run(input, parameters) {
 	}
 	return input;
 }
-```
+	```
     - *Internet - Display Webpages*
 - Launch `System Preferences` and navigate to `Keyboard` / `Shortcuts`
 - Under `Services` locate your Service in the `Text` category
