@@ -76,4 +76,3 @@ function run(input, parameters) {
     - Launch `System Preferences` and navigate to `Keyboard` / `Shortcuts`
     - Under `Services` locate your Service in the `Text` category
     - Assign a keyboard shortcut.
-
