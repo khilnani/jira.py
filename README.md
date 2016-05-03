@@ -42,12 +42,15 @@ Linux/Mac OS
         - The script will be saved to `/Users/USERNAME/Library/Services/jira-id.workflow`
     - Configure (top ot the screen) to be: Service recieves selected `text` in `any application`
 - Add the following workflow actions
-    - **Prompt for text (Optional)** - `Utilities` / `Run AppleScript`
+    - **Prompt for text (Optional)** - `Utilities` / `Run JavaScript` 
     ```javascript
-on run {input, parameters}
-    set x to the text returned of (display dialog "Enter a Jira ID" default answer input buttons {"OK"} default button 1)
-    return x
-end run
+function run(input, parameters) {
+	// https://github.com/dtinth/JXA-Cookbook/wiki
+	var app = Application.currentApplication()
+	app.includeStandardAdditions = true
+	var ans = app.displayDialog('Enter Jira Search', {defaultAnswer: '' + input} ).textReturned
+	return ans;
+}
     ```
     - Pick one of the options below
         - 1 - **Extract Jira ID**
