@@ -42,7 +42,7 @@ Linux/Mac OS
         - The script will be saved to `/Users/USERNAME/Library/Services/jira-id.workflow`
     - Configure (top ot the screen) to be: Service recieves selected `text` in `any application`
 - Add the following workflow actions
-    - `Utilities` / `Run AppleScript` - Optional
+    - Prompt for text (Optional) - `Utilities` / `Run AppleScript`
 	```
 on run {input, parameters}
     set x to the text returned of (display dialog "Enter a Jira ID" default answer input buttons {"OK"} default button 1)
@@ -71,7 +71,7 @@ function run(input, parameters) {
 	return 'https://jira.nationalgeographic.com/issues/?jql=text%20~%20%22' + input + '%22';
 }
 	        ```
-    - `Internet` / `Display Webpages`
+    - Launch the default browser - `Internet` / `Display Webpages`
 - Launch `System Preferences` and navigate to `Keyboard` / `Shortcuts`
 - Under `Services` locate your Service in the `Text` category
 - Assign a keyboard shortcut.
