@@ -14,6 +14,12 @@ and then output summary info for that jira ticket instantly.
 Extract Jira ID from clipboard or shared text or command line arg,
 and launch a browser with the URL to the Jira issue.
 
+## Installation
+
+- Download or clone the github repo, or:
+  - Pythonista console: `import urllib2; exec urllib2.urlopen('http://khl.io/jira-py').read()`
+  - Linux/Mac OS Terminal: `python -c "import urllib2; exec urllib2.urlopen('http://khl.io/jira-py').read()"`
+
 ## Configuration
 
 - Rename `jira.sample.conf` to `jira.conf` and update values
@@ -27,12 +33,6 @@ iOS / Pythonista
 Linux/Mac OS
 - Run this script in a linux/os x terminal with the JIRA ID as a command line arg
     - eg. `python jira.py ST-1222`
-
-## Installation
-
-- Download or clone the github repo, or:
-  - Pythonista console: `import urllib2; exec urllib2.urlopen('http://khl.io/jira-py').read()`
-  - Linux/Mac OS Terminal: `python -c "import urllib2; exec urllib2.urlopen('http://khl.io/jira-py').read()"`
 
 ## Mac OS Automator
 
