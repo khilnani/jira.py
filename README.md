@@ -42,11 +42,17 @@ Linux/Mac OS
         - The script will be saved to `/Users/USERNAME/Library/Services/jira-id.workflow`
     - Configure (top ot the screen) to be: Service recieves selected `text` in `any application`
 - Add the following workflow actions
-    - `Text` / `Ask for Test` - Optional
-        - Customize the prompt to something like 'Text with Jira id'
-    - `Utilities` /  `Run JavaScript`
-        - Use the JavScript below to extracxt a Jira ID from text
+    - `Utilities` / `Run AppleScript` - Optional
 	```
+on run {input, parameters}
+    set x to the text returned of (display dialog "Enter a Jira ID" default answer input buttons {"OK"} default button 1)
+    return x
+end run
+	```
+    - Pick one of the options below
+    	- 1 - Extract Jira ID
+    	    - `Utilities` /  `Run JavaScript` 
+	        ```
 function run(input, parameters) {
 	var re = new RegExp('([a-zA-Z]+-[0-9]+)');
 	var items = re.exec(input);
@@ -57,8 +63,22 @@ function run(input, parameters) {
 	}
 	return input;
 }
-	```
+	        ```
+        - 2 -  Perform a Jira Search 
+	        - `Utilities` /  `Run JavaScript`
+	        ```
+function run(input, parameters) {
+	return 'https://jira.nationalgeographic.com/issues/?jql=text%20~%20%22' + input + '%22';
+}
+	        ```
     - `Internet` / `Display Webpages`
 - Launch `System Preferences` and navigate to `Keyboard` / `Shortcuts`
 - Under `Services` locate your Service in the `Text` category
 - Assign a keyboard shortcut.
+
+
+on run {input, parameters}
+
+    set x to the text returned of (display dialog "Enter a Jira ID" default answer "" buttons {"OK"} default button 1)
+    return x
+end run
