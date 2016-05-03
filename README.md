@@ -34,7 +34,7 @@ Linux/Mac OS
   - Pythonista console: `import urllib2; exec urllib2.urlopen('http://khl.io/jira-py').read()`
   - Linux/Mac OS Terminal: `python -c "import urllib2; exec urllib2.urlopen('http://khl.io/jira-py').read()"`
 
-## Mac OS Equivalent
+## Mac OS Automator
 
 - Launch `/Applications/Automator`
 - Create a new document of type *Service*
@@ -42,9 +42,9 @@ Linux/Mac OS
         - The script will be saved to `/Users/USERNAME/Library/Services/jira-id.workflow`
     - Configure (top ot the screen) to be: Service recieves selected `text` in `any application`
 - Add the following workflow actions
-    - *Text - Ask for Test* - Optional
+    - `Text` / `Ask for Test` - Optional
         - Customize the prompt to something like 'Text with Jira id'
-    - *Utilities - Run JavaScript*
+    - `Utilities` /  `Run JavaScript`
         - Use the JavScript below to extracxt a Jira ID from text
 	```
 function run(input, parameters) {
@@ -58,7 +58,7 @@ function run(input, parameters) {
 	return input;
 }
 	```
-    - *Internet - Display Webpages*
+    - `Internet` / `Display Webpages`
 - Launch `System Preferences` and navigate to `Keyboard` / `Shortcuts`
 - Under `Services` locate your Service in the `Text` category
 - Assign a keyboard shortcut.
