@@ -8,7 +8,7 @@ License:
 The MIT License (MIT)
 Copyright (c) 2016 Nik Khilnani
 Github:
-https://github.com/khilnani/pythonista-scripts/
+https://github.com/khilnani/jira.py
 Configuration:
 Rename 'jira.sample.conf' to 'jira.conf' and update values
 To use:
