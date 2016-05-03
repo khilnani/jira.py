@@ -43,16 +43,16 @@ Linux/Mac OS
     - Configure (top ot the screen) to be: Service recieves selected `text` in `any application`
 - Add the following workflow actions
     - **Prompt for text (Optional)** - `Utilities` / `Run AppleScript`
-	```javascript
+    ```javascript
 on run {input, parameters}
     set x to the text returned of (display dialog "Enter a Jira ID" default answer input buttons {"OK"} default button 1)
     return x
 end run
-	```
+    ```
     - Pick one of the options below
-    	- 1 - **Extract Jira ID**
-    	    - `Utilities` /  `Run JavaScript` 
-	        ```javascript
+        - 1 - **Extract Jira ID**
+            - `Utilities` /  `Run JavaScript` 
+            ```javascript
 function run(input, parameters) {
     var re = new RegExp('([a-zA-Z]+-[0-9]+)');
     var items = re.exec(input);
@@ -63,14 +63,14 @@ function run(input, parameters) {
     }
     return input;
 }
-	        ```
+            ```
         - 2 - **Perform a Jira JQL Search**
-	        - `Utilities` /  `Run JavaScript`
-	        ```javascript
+            - `Utilities` /  `Run JavaScript`
+            ```javascript
 function run(input, parameters) {
     return 'https://jira.nationalgeographic.com/issues/?jql=' + input;
 }
-	        ```
+            ```
     - **Launch the default browser** - `Internet` / `Display Webpages`
 - Setup Keyboard Shortcut
     - Launch `System Preferences` and navigate to `Keyboard` / `Shortcuts`
