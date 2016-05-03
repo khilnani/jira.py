@@ -76,9 +76,3 @@ function run(input, parameters) {
 - Under `Services` locate your Service in the `Text` category
 - Assign a keyboard shortcut.
 
-
-on run {input, parameters}
-
-    set x to the text returned of (display dialog "Enter a Jira ID" default answer "" buttons {"OK"} default button 1)
-    return x
-end run
