@@ -2,13 +2,15 @@
 
 """
 Description:
-Parse text to pull out jira ID and launch a browser with the URL to the Jira issue.
-Supports App Share, or clipboard
+Parse text to pull out jira ID and launch a browser with the URL to the Jira issue. On iOS Pythonista supports App Share and clipboard, on linux/Mac OS supports command line arguments.
+
 License:
 The MIT License (MIT)
 Copyright (c) 2016 Nik Khilnani
+
 Github:
 https://github.com/khilnani/jira.py
+
 Configuration:
 Rename 'jira.sample.conf' to 'jira.conf' and update values
 To use:
