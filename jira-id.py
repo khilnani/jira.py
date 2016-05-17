@@ -48,7 +48,13 @@ def main():
             text = appex.get_text()
     else:
         text = clipboard.get()
+    if not text:
+        text = console.input_alert('Jira ID')
+
     if text:
+        ids = JIRA_PAT.findall(text)
+        if len(ids) == 0:
+            text = console.input_alert('Jira ID')
         ids = JIRA_PAT.findall(text)
         if len(ids) > 0:
             id = ids[0]
