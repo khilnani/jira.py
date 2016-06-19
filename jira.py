@@ -110,10 +110,15 @@ def get_new_cookie(base_url, username=None):
     password = getpass.getpass('Password:')
     body = {"username": username, "password":password}
     r = requests.post(url, json=body)
-    jsessionid = r.cookies['JSESSIONID']
-    update_conf_info(jsessionid, username)
-    return jsessionid
-
+    try:
+        jsessionid = r.cookies['JSESSIONID']
+        update_conf_info(jsessionid, username)
+        return jsessionid
+    except Exception as e:
+        print('No cookie found')
+        print(r)
+        sys.exit(e)
+    
 def get(base_url, jsessionid, path):
     url = base_url + path
     try:
