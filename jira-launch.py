@@ -19,10 +19,14 @@ To use:
 """
 
 import appex
+import os
 import clipboard, console, webbrowser, re, json
 from objc_util import *
 
-CONF_FILE = 'jira.conf'
+CONF_NAME = 'jira.conf'
+SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
+CONF_FILE = os.path.join(SCRIPT_DIR, CONF_NAME)
+
 JIRA_PAT = re.compile('([a-zA-Z]+-[0-9]+)')
 
 

@@ -31,6 +31,7 @@ To use:
 
 import sys
 import re
+import os
 import logging
 import json
 import urllib2
@@ -43,10 +44,13 @@ import requests
 
 ############################################################
 
-CONF_FILE = 'jira.conf'
+CONF_NAME = 'jira.conf'
+SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
+CONF_FILE = os.path.join(SCRIPT_DIR, CONF_NAME)
+
 JIRA_PAT = re.compile('([a-zA-Z]+-[0-9]+)')
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 print 'Version: ' + __version__
 
 ############################################################
@@ -110,10 +114,15 @@ def get_new_cookie(base_url, username=None):
     password = getpass.getpass('Password:')
     body = {"username": username, "password":password}
     r = requests.post(url, json=body)
-    jsessionid = r.cookies['JSESSIONID']
-    update_conf_info(jsessionid, username)
-    return jsessionid
-
+    try:
+        jsessionid = r.cookies['JSESSIONID']
+        update_conf_info(jsessionid, username)
+        return jsessionid
+    except Exception as e:
+        print('No cookie found')
+        print(r)
+        sys.exit(e)
+    
 def get(base_url, jsessionid, path):
     url = base_url + path
     try:

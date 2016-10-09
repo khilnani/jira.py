@@ -11,7 +11,7 @@ import urllib2
 INSTALL_DIR = os.getcwd()
 
 REPO_NAME = 'jira.py'
-SCRIPT_NAME = 'jira.py'
+SCRIPT_NAME = 'jira-summary.py'
 GITHUB_MASTER = 'https://raw.githubusercontent.com/khilnani/%s/master/' % REPO_NAME
 
 

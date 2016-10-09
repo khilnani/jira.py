@@ -23,10 +23,13 @@ import clipboard
 import console
 import webbrowser
 import json
+import os
 import urllib
 from objc_util import *
 
-CONF_FILE = 'jira.conf'
+CONF_NAME = 'jira.conf'
+SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
+CONF_FILE = os.path.join(SCRIPT_DIR, CONF_NAME)
 
 def get_conf_info():
     try:
