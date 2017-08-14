@@ -1,6 +1,6 @@
 ## jira.py
 
-Python scripts to help improve Jira interactions.
+Python scripts to help improve Atlassian Jira interactions.
 
 While designed for the iOS [Pythonista](http://omz-software.com/pythonista/) application, the scripts runs on any linux/mac os environment.
 
